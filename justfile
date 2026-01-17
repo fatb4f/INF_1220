@@ -17,3 +17,7 @@ typecheck:
 
 verify-material:
   uv run python tools/verify_material.py
+
+test:
+	uv run pytest -q
+

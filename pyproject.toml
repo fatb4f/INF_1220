@@ -21,10 +21,20 @@ notebook = [
   "jupytext",
 ]
 
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [tool.uv]
 # If/when you vendor algoctrl as a workspace package, add:
 # [tool.uv.sources]
 # algoctrl-tmpl = { path = "packages/algoctrl", editable = true }
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.ruff]
 line-length = 100
