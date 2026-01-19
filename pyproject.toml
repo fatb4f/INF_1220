@@ -8,6 +8,16 @@ dependencies = [
   "konch>=6.0.1",
   "ptpython>=3.0.32",
   "rich>=13.7.0",
+  "jupyterlab>=4.5.0",
+  "jupyterlab-unfold>=0.3.4",
+  "jupytext>=1.18.1",
+  "numpy>=2.3.5",
+  "sympy>=1.14.0",
+  "jupytext",
+  "jupyterlab-lsp>=5.2.0",
+  "jupyter-lsp>=2.3.0",
+  "python-lsp-server[all]>=1.14.0",
+  "jupyterlab-code-formatter>=3.0.2",
 ]
 
 [project.optional-dependencies]
@@ -15,10 +25,6 @@ dev = [
   "pytest>=8.0.0",
   "ruff>=0.5.0",
   "pyright>=1.1.380",
-]
-notebook = [
-  "ipykernel",
-  "jupytext",
 ]
 
 [build-system]
