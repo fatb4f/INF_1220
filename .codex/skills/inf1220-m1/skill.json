@@ -1,0 +1,140 @@
+{
+  "$schema": "https://example.invalid/codex/skill.schema.json",
+  "skill_id": "inf1220-m1",
+  "name": "INF1220 M1 Codex Tutor (AlgoCtrl + 3P + ACS)",
+  "version": "0.1.0",
+  "area": "content-gen",
+  "description": "Codex skill for INF1220 Module 1 (M1-07 algorithms + math recall): generate INF1220-style pseudocode solutions with interpreter-style traces, minimal tests, and objective coverage reporting using 3 Pillars + AlgoCtrl + Adaptive Control Strategies.",
+  "authority": {
+    "primary": [
+      "INF1220 course materials (pseudocode conventions are authoritative)"
+    ],
+    "support_oracle": [
+      "Python is allowed only as a verification oracle and must be labeled NON-SUBMISSION unless explicitly requested"
+    ],
+    "assets": [
+      ".codex/skills/inf1220-m1/assets/inf1220_m1.json"
+    ]
+  },
+  "entrypoint": {
+    "type": "prompt",
+    "file": ".codex/skills/inf1220-m1/SKILL.md",
+    "section": "Codex Prompt"
+  },
+  "inputs": [
+    {
+      "name": "user_input",
+      "type": "string",
+      "required": true,
+      "description": "Problem statement OR objective keys OR draft code/pseudocode to debug."
+    },
+    {
+      "name": "mode",
+      "type": "string",
+      "required": false,
+      "default": "artifacts",
+      "enum": ["stdout", "artifacts"],
+      "description": "stdout: print markdown only; artifacts: also write out/ files when requested."
+    }
+  ],
+  "outputs": {
+    "stdout_format": "markdown",
+    "artifacts": [
+      {
+        "path": "out/inf1220_solution.md",
+        "when": "mode=artifacts",
+        "description": "Rendered solution markdown (same as stdout)."
+      },
+      {
+        "path": "out/python_oracle.py",
+        "when": "mode=artifacts_and_oracle_needed",
+        "description": "Optional runnable verification script mirroring the pseudocode (clearly NON-SUBMISSION)."
+      }
+    ],
+    "evidence": [
+      {
+        "path": "out/evidence.json",
+        "when": "mode=artifacts",
+        "description": "Optional machine-readable evidence: objective_keys_used, tests_run (if any), assumptions, failure_modes."
+      }
+    ]
+  },
+  "objective_keys": [
+    "m1-07.algorithm_definition",
+    "m1-07.pseudocode",
+    "m1-07.variables_values",
+    "m1-07.boolean_logic",
+    "m1-07.math_truth_tables",
+    "m1-07.math_implication_equivalence",
+    "m1-07.conditionals_pseudocode",
+    "m1-07.programmer_notation",
+    "m1-07.loops",
+    "m1-07.arrays",
+    "m1-07.accumulator",
+    "m1-07.flowchart_pseudocode_mapping",
+    "m1-07.pseudocode_to_code_java"
+  ],
+  "constraints": {
+    "required_sections": [
+      "Observer Snapshot",
+      "AlgoCtrl Run",
+      "INF1220 Submission Form",
+      "Coverage Report",
+      "Micro-drills"
+    ],
+    "quality_gates": [
+      "No unexplained leaps: every result must be traceable via steps.",
+      "Boolean logic: precedence explicit via parentheses or justified by a truth table.",
+      "Loops: explicit termination condition and a variant (what progresses each iteration).",
+      "Arrays: explicit indexing base (0 vs 1) and bounds.",
+      "Accumulators: explicitly define behavior on empty input.",
+      "Ambiguity: ask at most one clarifying question, then proceed with stated assumptions."
+    ],
+    "method_lenses": {
+      "three_pillars": [
+        "Computation as a System",
+        "Statistics as Inference",
+        "Control & Adaptation"
+      ],
+      "algoctrl": ["GEN", "STRUCT", "SELECT", "FLOW", "EVAL"],
+      "acs": [
+        "feedforward",
+        "feedback",
+        "saturation_guardrails",
+        "update_locus"
+      ]
+    }
+  },
+  "repo_policy": {
+    "allowed_paths_write": [
+      "out/**",
+      ".codex/skills/inf1220-m1/**"
+    ],
+    "forbidden_paths_write": [
+      "**/.git/**",
+      "**/node_modules/**",
+      "**/.venv/**"
+    ],
+    "side_effects": {
+      "network": "disallowed",
+      "install_deps": "disallowed_unless_explicitly_requested"
+    }
+  },
+  "optional_tooling": {
+    "helpers": [
+      {
+        "name": "extract_objectives",
+        "path": ".codex/skills/inf1220-m1/scripts/extract_objectives.py",
+        "description": "Reads assets/inf1220_m1.json and prints an Objective Index (keys + titles)."
+      }
+    ],
+    "commands": [
+      {
+        "name": "print_objective_index",
+        "cmd": "python3 .codex/skills/inf1220-m1/scripts/extract_objectives.py .codex/skills/inf1220-m1/assets/inf1220_m1.json",
+        "when": "helper_exists"
+      }
+    ]
+  }
+}
+
