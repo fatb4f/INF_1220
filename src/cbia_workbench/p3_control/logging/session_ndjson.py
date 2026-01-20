@@ -18,8 +18,8 @@ class SessionLoggingConfig:
     log_dir: Optional[Path] = None
     prefix: str = "cbia"
     include_pid: bool = True
-    console: bool = True
-    flush_every: int = 1
+    console: bool = False
+    flush_every: int = 10
 
 
 class SessionLogger:

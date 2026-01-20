@@ -13,6 +13,10 @@ This repo is a **workbench** that **consumes** generated CBIA material and provi
 - `src/cbia_workbench/` — all executable/helpers code (uv project)
 - `tools/` — small entrypoint scripts (thin wrappers)
 
+## Tools
+
+- `tools/sync_material.py` supports `--fast` to skip metadata copy when speed matters.
+
 ## Quickstart
 
 ```bash
