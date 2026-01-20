@@ -47,6 +47,9 @@ The skill must return Markdown containing:
 - Forbidden: `.git/**`, `node_modules/**`, `.venv/**`, and unrelated refactors.
 - Network access: **disallowed** unless explicitly requested.
 
+## Collaboration
+- Refer to docs/WORKFLOW.md.
+
 ## Outputs, evidence, and logs (artifact mode)
 This repo uses **artifact mode** by default.
 
